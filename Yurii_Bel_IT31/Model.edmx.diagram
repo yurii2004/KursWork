@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="802d2a816aa54681ac318709655896af" Name="Diagram1">
+        <EntityTypeShape EntityType="теплосетиModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.ВидСети" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.Должность" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.ПослужнойСписок" Width="1.5" PointX="10.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.ПотребительТепла" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.Предприятие" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.Сотрудник" Width="1.5" PointX="8.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.СтальнаяТруба" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.ТепловаяСеть" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.ТепловойКолодец" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.ТепловойПункт" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.УзелСети" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="теплосетиModel.УчастокТрубопровода" Width="1.5" PointX="10.5" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="теплосетиModel.R_14" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_17" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_19" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_18" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_7" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_2" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_20" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_10" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_4" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_6" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_5" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_21" ManuallyRouted="false" />
+        <AssociationConnector Association="теплосетиModel.R_22" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

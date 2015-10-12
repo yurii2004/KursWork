@@ -1,0 +1,875 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище теплосетиModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ВидСети">
+          <Key>
+            <PropertyRef Name="НомерВида" />
+          </Key>
+          <Property Name="НомерВида" Type="int" Nullable="false" />
+          <Property Name="НаименованиеВида" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Должность">
+          <Key>
+            <PropertyRef Name="КодДолжности" />
+          </Key>
+          <Property Name="КодДолжности" Type="int" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="ПослужнойСписок">
+          <Key>
+            <PropertyRef Name="КодСписка" />
+          </Key>
+          <Property Name="КодСписка" Type="int" Nullable="false" />
+          <Property Name="КодСотрудника" Type="int" />
+          <Property Name="КодДолжности" Type="int" />
+        </EntityType>
+        <EntityType Name="ПотребительТепла">
+          <Key>
+            <PropertyRef Name="НомерПотребителя" />
+          </Key>
+          <Property Name="НомерПотребителя" Type="int" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="20" />
+          <Property Name="НомерУзла" Type="int" />
+          <Property Name="РасчетнаяМощность" Type="int" />
+        </EntityType>
+        <EntityType Name="Предприятие">
+          <Key>
+            <PropertyRef Name="КодПредприятия" />
+          </Key>
+          <Property Name="НаименованиеПредприятия" Type="varchar" MaxLength="20" />
+          <Property Name="ОрганУправления" Type="varchar" MaxLength="20" />
+          <Property Name="КодПредприятия" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сотрудник">
+          <Key>
+            <PropertyRef Name="КодСотрудника" />
+          </Key>
+          <Property Name="КодСотрудника" Type="int" Nullable="false" />
+          <Property Name="КодДолжности" Type="int" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="20" />
+          <Property Name="Имя" Type="varchar" MaxLength="20" />
+          <Property Name="Отчество" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="СтальнаяТруба">
+          <Key>
+            <PropertyRef Name="НомерТрубы" />
+          </Key>
+          <Property Name="НомерТрубы" Type="int" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="20" />
+          <Property Name="НаружныйДиаметр" Type="int" />
+          <Property Name="Толщина" Type="int" />
+          <Property Name="ПогонныйВнутреннийОбъем" Type="int" />
+          <Property Name="ПогонныйВес" Type="int" />
+        </EntityType>
+        <EntityType Name="ТепловаяСеть">
+          <Key>
+            <PropertyRef Name="НомерСети" />
+          </Key>
+          <Property Name="НомерСети" Type="int" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="20" />
+          <Property Name="КодПредприятия" Type="int" />
+          <Property Name="НомерВида" Type="int" />
+        </EntityType>
+        <EntityType Name="ТепловойКолодец">
+          <Key>
+            <PropertyRef Name="НомерТепловогоКолодца" />
+          </Key>
+          <Property Name="НомерТепловогоКолодца" Type="int" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="20" />
+          <Property Name="НомерУзла" Type="int" />
+        </EntityType>
+        <EntityType Name="ТепловойПункт">
+          <Key>
+            <PropertyRef Name="НомерТепловогоПункта" />
+          </Key>
+          <Property Name="НомерТепловогоПункта" Type="int" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="20" />
+          <Property Name="НомерУзла" Type="int" />
+        </EntityType>
+        <EntityType Name="УзелСети">
+          <Key>
+            <PropertyRef Name="НомерУзла" />
+          </Key>
+          <Property Name="НомерУзла" Type="int" Nullable="false" />
+          <Property Name="НомерСети" Type="int" />
+        </EntityType>
+        <EntityType Name="УчастокТрубопровода">
+          <Key>
+            <PropertyRef Name="НомерУчастка" />
+          </Key>
+          <Property Name="НомерТрубы" Type="int" />
+          <Property Name="НомерУчастка" Type="int" Nullable="false" />
+          <Property Name="Длина" Type="int" />
+          <Property Name="Диаметр" Type="int" />
+          <Property Name="Толщина" Type="int" />
+          <Property Name="ДатаПоследнегоРемонта" Type="datetime" />
+          <Property Name="КодСотрудника" Type="int" />
+          <Property Name="НомерУзлаНачала" Type="int" />
+          <Property Name="НомерУзлаКонца" Type="int" />
+        </EntityType>
+        <Association Name="R_10">
+          <End Role="СтальнаяТруба" Type="Self.СтальнаяТруба" Multiplicity="0..1" />
+          <End Role="УчастокТрубопровода" Type="Self.УчастокТрубопровода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="СтальнаяТруба">
+              <PropertyRef Name="НомерТрубы" />
+            </Principal>
+            <Dependent Role="УчастокТрубопровода">
+              <PropertyRef Name="НомерТрубы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_14">
+          <End Role="ВидСети" Type="Self.ВидСети" Multiplicity="0..1" />
+          <End Role="ТепловаяСеть" Type="Self.ТепловаяСеть" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ВидСети">
+              <PropertyRef Name="НомерВида" />
+            </Principal>
+            <Dependent Role="ТепловаяСеть">
+              <PropertyRef Name="НомерВида" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_17">
+          <End Role="Должность" Type="Self.Должность" Multiplicity="0..1" />
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должность">
+              <PropertyRef Name="КодДолжности" />
+            </Principal>
+            <Dependent Role="Сотрудник">
+              <PropertyRef Name="КодДолжности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_18">
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="0..1" />
+          <End Role="ПослужнойСписок" Type="Self.ПослужнойСписок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудник">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="ПослужнойСписок">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_19">
+          <End Role="Должность" Type="Self.Должность" Multiplicity="0..1" />
+          <End Role="ПослужнойСписок" Type="Self.ПослужнойСписок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должность">
+              <PropertyRef Name="КодДолжности" />
+            </Principal>
+            <Dependent Role="ПослужнойСписок">
+              <PropertyRef Name="КодДолжности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_2">
+          <End Role="Предприятие" Type="Self.Предприятие" Multiplicity="0..1" />
+          <End Role="ТепловаяСеть" Type="Self.ТепловаяСеть" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Предприятие">
+              <PropertyRef Name="КодПредприятия" />
+            </Principal>
+            <Dependent Role="ТепловаяСеть">
+              <PropertyRef Name="КодПредприятия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_20">
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="0..1" />
+          <End Role="УчастокТрубопровода" Type="Self.УчастокТрубопровода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудник">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="УчастокТрубопровода">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_21">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="УчастокТрубопровода" Type="Self.УчастокТрубопровода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="УчастокТрубопровода">
+              <PropertyRef Name="НомерУзлаНачала" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_22">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="УчастокТрубопровода" Type="Self.УчастокТрубопровода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="УчастокТрубопровода">
+              <PropertyRef Name="НомерУзлаКонца" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_4">
+          <End Role="ТепловаяСеть" Type="Self.ТепловаяСеть" Multiplicity="0..1" />
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТепловаяСеть">
+              <PropertyRef Name="НомерСети" />
+            </Principal>
+            <Dependent Role="УзелСети">
+              <PropertyRef Name="НомерСети" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_5">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="ТепловойПункт" Type="Self.ТепловойПункт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="ТепловойПункт">
+              <PropertyRef Name="НомерУзла" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_6">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="ТепловойКолодец" Type="Self.ТепловойКолодец" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="ТепловойКолодец">
+              <PropertyRef Name="НомерУзла" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_7">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="ПотребительТепла" Type="Self.ПотребительТепла" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="ПотребительТепла">
+              <PropertyRef Name="НомерУзла" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище теплосетиModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ВидСети" EntityType="Self.ВидСети" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Должность" EntityType="Self.Должность" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ПослужнойСписок" EntityType="Self.ПослужнойСписок" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ПотребительТепла" EntityType="Self.ПотребительТепла" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Предприятие" EntityType="Self.Предприятие" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудник" EntityType="Self.Сотрудник" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="СтальнаяТруба" EntityType="Self.СтальнаяТруба" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТепловаяСеть" EntityType="Self.ТепловаяСеть" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТепловойКолодец" EntityType="Self.ТепловойКолодец" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТепловойПункт" EntityType="Self.ТепловойПункт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="УзелСети" EntityType="Self.УзелСети" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="УчастокТрубопровода" EntityType="Self.УчастокТрубопровода" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="R_10" Association="Self.R_10">
+            <End Role="СтальнаяТруба" EntitySet="СтальнаяТруба" />
+            <End Role="УчастокТрубопровода" EntitySet="УчастокТрубопровода" />
+          </AssociationSet>
+          <AssociationSet Name="R_14" Association="Self.R_14">
+            <End Role="ВидСети" EntitySet="ВидСети" />
+            <End Role="ТепловаяСеть" EntitySet="ТепловаяСеть" />
+          </AssociationSet>
+          <AssociationSet Name="R_17" Association="Self.R_17">
+            <End Role="Должность" EntitySet="Должность" />
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+          </AssociationSet>
+          <AssociationSet Name="R_18" Association="Self.R_18">
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+            <End Role="ПослужнойСписок" EntitySet="ПослужнойСписок" />
+          </AssociationSet>
+          <AssociationSet Name="R_19" Association="Self.R_19">
+            <End Role="Должность" EntitySet="Должность" />
+            <End Role="ПослужнойСписок" EntitySet="ПослужнойСписок" />
+          </AssociationSet>
+          <AssociationSet Name="R_2" Association="Self.R_2">
+            <End Role="Предприятие" EntitySet="Предприятие" />
+            <End Role="ТепловаяСеть" EntitySet="ТепловаяСеть" />
+          </AssociationSet>
+          <AssociationSet Name="R_20" Association="Self.R_20">
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+            <End Role="УчастокТрубопровода" EntitySet="УчастокТрубопровода" />
+          </AssociationSet>
+          <AssociationSet Name="R_21" Association="Self.R_21">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="УчастокТрубопровода" EntitySet="УчастокТрубопровода" />
+          </AssociationSet>
+          <AssociationSet Name="R_22" Association="Self.R_22">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="УчастокТрубопровода" EntitySet="УчастокТрубопровода" />
+          </AssociationSet>
+          <AssociationSet Name="R_4" Association="Self.R_4">
+            <End Role="ТепловаяСеть" EntitySet="ТепловаяСеть" />
+            <End Role="УзелСети" EntitySet="УзелСети" />
+          </AssociationSet>
+          <AssociationSet Name="R_5" Association="Self.R_5">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="ТепловойПункт" EntitySet="ТепловойПункт" />
+          </AssociationSet>
+          <AssociationSet Name="R_6" Association="Self.R_6">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="ТепловойКолодец" EntitySet="ТепловойКолодец" />
+          </AssociationSet>
+          <AssociationSet Name="R_7" Association="Self.R_7">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="ПотребительТепла" EntitySet="ПотребительТепла" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="теплосетиModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ВидСети">
+          <Key>
+            <PropertyRef Name="НомерВида" />
+          </Key>
+          <Property Name="НомерВида" Type="Int32" Nullable="false" />
+          <Property Name="НаименованиеВида" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ТепловаяСеть" Relationship="Self.R_14" FromRole="ВидСети" ToRole="ТепловаяСеть" />
+        </EntityType>
+        <EntityType Name="Должность">
+          <Key>
+            <PropertyRef Name="КодДолжности" />
+          </Key>
+          <Property Name="КодДолжности" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Сотрудник" Relationship="Self.R_17" FromRole="Должность" ToRole="Сотрудник" />
+          <NavigationProperty Name="ПослужнойСписок" Relationship="Self.R_19" FromRole="Должность" ToRole="ПослужнойСписок" />
+        </EntityType>
+        <EntityType Name="ПослужнойСписок">
+          <Key>
+            <PropertyRef Name="КодСписка" />
+          </Key>
+          <Property Name="КодСписка" Type="Int32" Nullable="false" />
+          <Property Name="КодСотрудника" Type="Int32" />
+          <Property Name="КодДолжности" Type="Int32" />
+          <NavigationProperty Name="Должность" Relationship="Self.R_19" FromRole="ПослужнойСписок" ToRole="Должность" />
+          <NavigationProperty Name="Сотрудник" Relationship="Self.R_18" FromRole="ПослужнойСписок" ToRole="Сотрудник" />
+        </EntityType>
+        <EntityType Name="ПотребительТепла">
+          <Key>
+            <PropertyRef Name="НомерПотребителя" />
+          </Key>
+          <Property Name="НомерПотребителя" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="НомерУзла" Type="Int32" />
+          <Property Name="РасчетнаяМощность" Type="Int32" />
+          <NavigationProperty Name="УзелСети" Relationship="Self.R_7" FromRole="ПотребительТепла" ToRole="УзелСети" />
+        </EntityType>
+        <EntityType Name="Предприятие">
+          <Key>
+            <PropertyRef Name="КодПредприятия" />
+          </Key>
+          <Property Name="НаименованиеПредприятия" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ОрганУправления" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="КодПредприятия" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ТепловаяСеть" Relationship="Self.R_2" FromRole="Предприятие" ToRole="ТепловаяСеть" />
+        </EntityType>
+        <EntityType Name="Сотрудник">
+          <Key>
+            <PropertyRef Name="КодСотрудника" />
+          </Key>
+          <Property Name="КодСотрудника" Type="Int32" Nullable="false" />
+          <Property Name="КодДолжности" Type="Int32" />
+          <Property Name="Фамилия" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Имя" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Отчество" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Должность" Relationship="Self.R_17" FromRole="Сотрудник" ToRole="Должность" />
+          <NavigationProperty Name="ПослужнойСписок" Relationship="Self.R_18" FromRole="Сотрудник" ToRole="ПослужнойСписок" />
+          <NavigationProperty Name="УчастокТрубопровода" Relationship="Self.R_20" FromRole="Сотрудник" ToRole="УчастокТрубопровода" />
+        </EntityType>
+        <EntityType Name="СтальнаяТруба">
+          <Key>
+            <PropertyRef Name="НомерТрубы" />
+          </Key>
+          <Property Name="НомерТрубы" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="НаружныйДиаметр" Type="Int32" />
+          <Property Name="Толщина" Type="Int32" />
+          <Property Name="ПогонныйВнутреннийОбъем" Type="Int32" />
+          <Property Name="ПогонныйВес" Type="Int32" />
+          <NavigationProperty Name="УчастокТрубопровода" Relationship="Self.R_10" FromRole="СтальнаяТруба" ToRole="УчастокТрубопровода" />
+        </EntityType>
+        <EntityType Name="ТепловаяСеть">
+          <Key>
+            <PropertyRef Name="НомерСети" />
+          </Key>
+          <Property Name="НомерСети" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="КодПредприятия" Type="Int32" />
+          <Property Name="НомерВида" Type="Int32" />
+          <NavigationProperty Name="ВидСети" Relationship="Self.R_14" FromRole="ТепловаяСеть" ToRole="ВидСети" />
+          <NavigationProperty Name="Предприятие" Relationship="Self.R_2" FromRole="ТепловаяСеть" ToRole="Предприятие" />
+          <NavigationProperty Name="УзелСети" Relationship="Self.R_4" FromRole="ТепловаяСеть" ToRole="УзелСети" />
+        </EntityType>
+        <EntityType Name="ТепловойКолодец">
+          <Key>
+            <PropertyRef Name="НомерТепловогоКолодца" />
+          </Key>
+          <Property Name="НомерТепловогоКолодца" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="НомерУзла" Type="Int32" />
+          <NavigationProperty Name="УзелСети" Relationship="Self.R_6" FromRole="ТепловойКолодец" ToRole="УзелСети" />
+        </EntityType>
+        <EntityType Name="ТепловойПункт">
+          <Key>
+            <PropertyRef Name="НомерТепловогоПункта" />
+          </Key>
+          <Property Name="НомерТепловогоПункта" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="НомерУзла" Type="Int32" />
+          <NavigationProperty Name="УзелСети" Relationship="Self.R_5" FromRole="ТепловойПункт" ToRole="УзелСети" />
+        </EntityType>
+        <EntityType Name="УзелСети">
+          <Key>
+            <PropertyRef Name="НомерУзла" />
+          </Key>
+          <Property Name="НомерУзла" Type="Int32" Nullable="false" />
+          <Property Name="НомерСети" Type="Int32" />
+          <NavigationProperty Name="ПотребительТепла" Relationship="Self.R_7" FromRole="УзелСети" ToRole="ПотребительТепла" />
+          <NavigationProperty Name="ТепловаяСеть" Relationship="Self.R_4" FromRole="УзелСети" ToRole="ТепловаяСеть" />
+          <NavigationProperty Name="ТепловойКолодец" Relationship="Self.R_6" FromRole="УзелСети" ToRole="ТепловойКолодец" />
+          <NavigationProperty Name="ТепловойПункт" Relationship="Self.R_5" FromRole="УзелСети" ToRole="ТепловойПункт" />
+          <NavigationProperty Name="УчастокТрубопровода" Relationship="Self.R_21" FromRole="УзелСети" ToRole="УчастокТрубопровода" />
+          <NavigationProperty Name="УчастокТрубопровода1" Relationship="Self.R_22" FromRole="УзелСети" ToRole="УчастокТрубопровода" />
+        </EntityType>
+        <EntityType Name="УчастокТрубопровода">
+          <Key>
+            <PropertyRef Name="НомерУчастка" />
+          </Key>
+          <Property Name="НомерТрубы" Type="Int32" />
+          <Property Name="НомерУчастка" Type="Int32" Nullable="false" />
+          <Property Name="Длина" Type="Int32" />
+          <Property Name="Диаметр" Type="Int32" />
+          <Property Name="Толщина" Type="Int32" />
+          <Property Name="ДатаПоследнегоРемонта" Type="DateTime" Precision="3" />
+          <Property Name="КодСотрудника" Type="Int32" />
+          <Property Name="НомерУзлаНачала" Type="Int32" />
+          <Property Name="НомерУзлаКонца" Type="Int32" />
+          <NavigationProperty Name="Сотрудник" Relationship="Self.R_20" FromRole="УчастокТрубопровода" ToRole="Сотрудник" />
+          <NavigationProperty Name="СтальнаяТруба" Relationship="Self.R_10" FromRole="УчастокТрубопровода" ToRole="СтальнаяТруба" />
+          <NavigationProperty Name="УзелСети" Relationship="Self.R_21" FromRole="УчастокТрубопровода" ToRole="УзелСети" />
+          <NavigationProperty Name="УзелСети1" Relationship="Self.R_22" FromRole="УчастокТрубопровода" ToRole="УзелСети" />
+        </EntityType>
+        <Association Name="R_14">
+          <End Role="ВидСети" Type="Self.ВидСети" Multiplicity="0..1" />
+          <End Role="ТепловаяСеть" Type="Self.ТепловаяСеть" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ВидСети">
+              <PropertyRef Name="НомерВида" />
+            </Principal>
+            <Dependent Role="ТепловаяСеть">
+              <PropertyRef Name="НомерВида" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_17">
+          <End Role="Должность" Type="Self.Должность" Multiplicity="0..1" />
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должность">
+              <PropertyRef Name="КодДолжности" />
+            </Principal>
+            <Dependent Role="Сотрудник">
+              <PropertyRef Name="КодДолжности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_19">
+          <End Role="Должность" Type="Self.Должность" Multiplicity="0..1" />
+          <End Role="ПослужнойСписок" Type="Self.ПослужнойСписок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должность">
+              <PropertyRef Name="КодДолжности" />
+            </Principal>
+            <Dependent Role="ПослужнойСписок">
+              <PropertyRef Name="КодДолжности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_18">
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="0..1" />
+          <End Role="ПослужнойСписок" Type="Self.ПослужнойСписок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудник">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="ПослужнойСписок">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_7">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="ПотребительТепла" Type="Self.ПотребительТепла" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="ПотребительТепла">
+              <PropertyRef Name="НомерУзла" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_2">
+          <End Role="Предприятие" Type="Self.Предприятие" Multiplicity="0..1" />
+          <End Role="ТепловаяСеть" Type="Self.ТепловаяСеть" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Предприятие">
+              <PropertyRef Name="КодПредприятия" />
+            </Principal>
+            <Dependent Role="ТепловаяСеть">
+              <PropertyRef Name="КодПредприятия" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_20">
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="0..1" />
+          <End Role="УчастокТрубопровода" Type="Self.УчастокТрубопровода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудник">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="УчастокТрубопровода">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_10">
+          <End Role="СтальнаяТруба" Type="Self.СтальнаяТруба" Multiplicity="0..1" />
+          <End Role="УчастокТрубопровода" Type="Self.УчастокТрубопровода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="СтальнаяТруба">
+              <PropertyRef Name="НомерТрубы" />
+            </Principal>
+            <Dependent Role="УчастокТрубопровода">
+              <PropertyRef Name="НомерТрубы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_4">
+          <End Role="ТепловаяСеть" Type="Self.ТепловаяСеть" Multiplicity="0..1" />
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТепловаяСеть">
+              <PropertyRef Name="НомерСети" />
+            </Principal>
+            <Dependent Role="УзелСети">
+              <PropertyRef Name="НомерСети" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_6">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="ТепловойКолодец" Type="Self.ТепловойКолодец" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="ТепловойКолодец">
+              <PropertyRef Name="НомерУзла" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_5">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="ТепловойПункт" Type="Self.ТепловойПункт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="ТепловойПункт">
+              <PropertyRef Name="НомерУзла" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_21">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="УчастокТрубопровода" Type="Self.УчастокТрубопровода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="УчастокТрубопровода">
+              <PropertyRef Name="НомерУзлаНачала" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_22">
+          <End Role="УзелСети" Type="Self.УзелСети" Multiplicity="0..1" />
+          <End Role="УчастокТрубопровода" Type="Self.УчастокТрубопровода" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="УзелСети">
+              <PropertyRef Name="НомерУзла" />
+            </Principal>
+            <Dependent Role="УчастокТрубопровода">
+              <PropertyRef Name="НомерУзлаКонца" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ТеплосетиEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="ВидСети" EntityType="Self.ВидСети" />
+          <EntitySet Name="Должность" EntityType="Self.Должность" />
+          <EntitySet Name="ПослужнойСписок" EntityType="Self.ПослужнойСписок" />
+          <EntitySet Name="ПотребительТепла" EntityType="Self.ПотребительТепла" />
+          <EntitySet Name="Предприятие" EntityType="Self.Предприятие" />
+          <EntitySet Name="Сотрудник" EntityType="Self.Сотрудник" />
+          <EntitySet Name="СтальнаяТруба" EntityType="Self.СтальнаяТруба" />
+          <EntitySet Name="ТепловаяСеть" EntityType="Self.ТепловаяСеть" />
+          <EntitySet Name="ТепловойКолодец" EntityType="Self.ТепловойКолодец" />
+          <EntitySet Name="ТепловойПункт" EntityType="Self.ТепловойПункт" />
+          <EntitySet Name="УзелСети" EntityType="Self.УзелСети" />
+          <EntitySet Name="УчастокТрубопровода" EntityType="Self.УчастокТрубопровода" />
+          <AssociationSet Name="R_14" Association="Self.R_14">
+            <End Role="ВидСети" EntitySet="ВидСети" />
+            <End Role="ТепловаяСеть" EntitySet="ТепловаяСеть" />
+          </AssociationSet>
+          <AssociationSet Name="R_17" Association="Self.R_17">
+            <End Role="Должность" EntitySet="Должность" />
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+          </AssociationSet>
+          <AssociationSet Name="R_19" Association="Self.R_19">
+            <End Role="Должность" EntitySet="Должность" />
+            <End Role="ПослужнойСписок" EntitySet="ПослужнойСписок" />
+          </AssociationSet>
+          <AssociationSet Name="R_18" Association="Self.R_18">
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+            <End Role="ПослужнойСписок" EntitySet="ПослужнойСписок" />
+          </AssociationSet>
+          <AssociationSet Name="R_7" Association="Self.R_7">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="ПотребительТепла" EntitySet="ПотребительТепла" />
+          </AssociationSet>
+          <AssociationSet Name="R_2" Association="Self.R_2">
+            <End Role="Предприятие" EntitySet="Предприятие" />
+            <End Role="ТепловаяСеть" EntitySet="ТепловаяСеть" />
+          </AssociationSet>
+          <AssociationSet Name="R_20" Association="Self.R_20">
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+            <End Role="УчастокТрубопровода" EntitySet="УчастокТрубопровода" />
+          </AssociationSet>
+          <AssociationSet Name="R_10" Association="Self.R_10">
+            <End Role="СтальнаяТруба" EntitySet="СтальнаяТруба" />
+            <End Role="УчастокТрубопровода" EntitySet="УчастокТрубопровода" />
+          </AssociationSet>
+          <AssociationSet Name="R_4" Association="Self.R_4">
+            <End Role="ТепловаяСеть" EntitySet="ТепловаяСеть" />
+            <End Role="УзелСети" EntitySet="УзелСети" />
+          </AssociationSet>
+          <AssociationSet Name="R_6" Association="Self.R_6">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="ТепловойКолодец" EntitySet="ТепловойКолодец" />
+          </AssociationSet>
+          <AssociationSet Name="R_5" Association="Self.R_5">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="ТепловойПункт" EntitySet="ТепловойПункт" />
+          </AssociationSet>
+          <AssociationSet Name="R_21" Association="Self.R_21">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="УчастокТрубопровода" EntitySet="УчастокТрубопровода" />
+          </AssociationSet>
+          <AssociationSet Name="R_22" Association="Self.R_22">
+            <End Role="УзелСети" EntitySet="УзелСети" />
+            <End Role="УчастокТрубопровода" EntitySet="УчастокТрубопровода" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище теплосетиModelContainer" CdmEntityContainer="ТеплосетиEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="теплосетиModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ВидСети">
+            <EntityTypeMapping TypeName="теплосетиModel.ВидСети">
+              <MappingFragment StoreEntitySet="ВидСети">
+                <ScalarProperty Name="НомерВида" ColumnName="НомерВида" />
+                <ScalarProperty Name="НаименованиеВида" ColumnName="НаименованиеВида" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Должность">
+            <EntityTypeMapping TypeName="теплосетиModel.Должность">
+              <MappingFragment StoreEntitySet="Должность">
+                <ScalarProperty Name="КодДолжности" ColumnName="КодДолжности" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ПослужнойСписок">
+            <EntityTypeMapping TypeName="теплосетиModel.ПослужнойСписок">
+              <MappingFragment StoreEntitySet="ПослужнойСписок">
+                <ScalarProperty Name="КодСписка" ColumnName="КодСписка" />
+                <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудника" />
+                <ScalarProperty Name="КодДолжности" ColumnName="КодДолжности" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ПотребительТепла">
+            <EntityTypeMapping TypeName="теплосетиModel.ПотребительТепла">
+              <MappingFragment StoreEntitySet="ПотребительТепла">
+                <ScalarProperty Name="НомерПотребителя" ColumnName="НомерПотребителя" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="НомерУзла" ColumnName="НомерУзла" />
+                <ScalarProperty Name="РасчетнаяМощность" ColumnName="РасчетнаяМощность" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Предприятие">
+            <EntityTypeMapping TypeName="теплосетиModel.Предприятие">
+              <MappingFragment StoreEntitySet="Предприятие">
+                <ScalarProperty Name="НаименованиеПредприятия" ColumnName="НаименованиеПредприятия" />
+                <ScalarProperty Name="ОрганУправления" ColumnName="ОрганУправления" />
+                <ScalarProperty Name="КодПредприятия" ColumnName="КодПредприятия" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудник">
+            <EntityTypeMapping TypeName="теплосетиModel.Сотрудник">
+              <MappingFragment StoreEntitySet="Сотрудник">
+                <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудника" />
+                <ScalarProperty Name="КодДолжности" ColumnName="КодДолжности" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="СтальнаяТруба">
+            <EntityTypeMapping TypeName="теплосетиModel.СтальнаяТруба">
+              <MappingFragment StoreEntitySet="СтальнаяТруба">
+                <ScalarProperty Name="НомерТрубы" ColumnName="НомерТрубы" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="НаружныйДиаметр" ColumnName="НаружныйДиаметр" />
+                <ScalarProperty Name="Толщина" ColumnName="Толщина" />
+                <ScalarProperty Name="ПогонныйВнутреннийОбъем" ColumnName="ПогонныйВнутреннийОбъем" />
+                <ScalarProperty Name="ПогонныйВес" ColumnName="ПогонныйВес" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТепловаяСеть">
+            <EntityTypeMapping TypeName="теплосетиModel.ТепловаяСеть">
+              <MappingFragment StoreEntitySet="ТепловаяСеть">
+                <ScalarProperty Name="НомерСети" ColumnName="НомерСети" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="КодПредприятия" ColumnName="КодПредприятия" />
+                <ScalarProperty Name="НомерВида" ColumnName="НомерВида" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТепловойКолодец">
+            <EntityTypeMapping TypeName="теплосетиModel.ТепловойКолодец">
+              <MappingFragment StoreEntitySet="ТепловойКолодец">
+                <ScalarProperty Name="НомерТепловогоКолодца" ColumnName="НомерТепловогоКолодца" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="НомерУзла" ColumnName="НомерУзла" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТепловойПункт">
+            <EntityTypeMapping TypeName="теплосетиModel.ТепловойПункт">
+              <MappingFragment StoreEntitySet="ТепловойПункт">
+                <ScalarProperty Name="НомерТепловогоПункта" ColumnName="НомерТепловогоПункта" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="НомерУзла" ColumnName="НомерУзла" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="УзелСети">
+            <EntityTypeMapping TypeName="теплосетиModel.УзелСети">
+              <MappingFragment StoreEntitySet="УзелСети">
+                <ScalarProperty Name="НомерУзла" ColumnName="НомерУзла" />
+                <ScalarProperty Name="НомерСети" ColumnName="НомерСети" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="УчастокТрубопровода">
+            <EntityTypeMapping TypeName="теплосетиModel.УчастокТрубопровода">
+              <MappingFragment StoreEntitySet="УчастокТрубопровода">
+                <ScalarProperty Name="НомерТрубы" ColumnName="НомерТрубы" />
+                <ScalarProperty Name="НомерУчастка" ColumnName="НомерУчастка" />
+                <ScalarProperty Name="Длина" ColumnName="Длина" />
+                <ScalarProperty Name="Диаметр" ColumnName="Диаметр" />
+                <ScalarProperty Name="Толщина" ColumnName="Толщина" />
+                <ScalarProperty Name="ДатаПоследнегоРемонта" ColumnName="ДатаПоследнегоРемонта" />
+                <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудника" />
+                <ScalarProperty Name="НомерУзлаНачала" ColumnName="НомерУзлаНачала" />
+                <ScalarProperty Name="НомерУзлаКонца" ColumnName="НомерУзлаКонца" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

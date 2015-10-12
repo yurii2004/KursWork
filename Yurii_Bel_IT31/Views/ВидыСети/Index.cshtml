@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Yurii_Bel_IT31.ВидСети>
+
+@{
+    ViewBag.Title = "ВидыСетиIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ВидыСетиIndex</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.НомерВида)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.НаименованиеВида)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.НомерВида)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.НаименованиеВида)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.НомерВида  }) |
+            @Html.ActionLink("Details", "Details", new {  id=item.НомерВида  }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.НомерВида  })
+        </td>
+    </tr>
+}
+
+</table>
